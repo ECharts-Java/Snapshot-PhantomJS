@@ -13,19 +13,19 @@
   </description>
   <url>https://echarts.icepear.org/</url>
 
-  <!-- <licenses>
+  <licenses>
     <license>
       <name>Apache License 2.0</name>
-      <url>https://github.com/ECharts-a/ECharts-Java/blob/master/LICENSE</url>
+      <url>https://github.com/ECharts-Java/Snapshot-PhantomJS/blob/main/LICENSE</url>
       <distribution>repo</distribution>
     </license>
-  </licenses> -->
+  </licenses>
 
-  <!-- <scm>
-    <url>https://github.com/ECharts-Java/ECharts-Java</url>
-    <connection>https://github.com/ECharts-Java/ECharts-Java.git</connection>
+  <scm>
+    <url>https://github.com/ECharts-Java/Snapshot-PhantomJS</url>
+    <connection>https://github.com/ECharts-Java/Snapshot-PhantomJS.git</connection>
     <developerConnection>https://github.com/ECharts-Java</developerConnection>
-  </scm> -->
+  </scm>
 
   <developers>
     <developer>
@@ -59,15 +59,28 @@
 
   <dependencies>
     <dependency>
-        <groupId>org.icepear.echarts</groupId>
-        <artifactId>echarts-java</artifactId>
-        <version>1.0.5</version>
-      </dependency>
+      <groupId>org.icepear.echarts</groupId>
+      <artifactId>echarts-java</artifactId>
+      <version>1.0.5</version>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.12</version>
       <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.22</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.11.0</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
