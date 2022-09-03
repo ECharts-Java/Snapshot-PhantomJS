@@ -20,14 +20,15 @@ var snapshot_svg =
   "       var element = document.querySelector('div[_echarts_instance_] div');" +
   "       return element.innerHTML;" +
   "    }";
-page.open(file, function(){
-  window.setTimeout(function(){
-    if(file_type === 'svg'){
-      var content = page.evaluateJavaScript(snapshot_svg);
-    }else{
-      var content = page.evaluateJavaScript(snapshot);
-    }
-    console.log(content);
-    phantom.exit();
-  }, delay);
-});
+var file_content = system.stdin.read();
+page.setContent(file_content, "");
+
+window.setTimeout(function(){
+  if(file_type === 'svg'){
+    var content = page.evaluateJavaScript(snapshot_svg);
+  }else{
+    var content = page.evaluateJavaScript(snapshot);
+  }
+  console.log(content);
+  phantom.exit();
+}, delay);

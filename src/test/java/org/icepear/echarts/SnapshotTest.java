@@ -58,7 +58,7 @@ public class SnapshotTest {
 
     @Test
     public void testTakeSnapshot() {
-        SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "./", "x.png");
+        SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "file:///Users/xiaochuanxu/CodeBase/Snapshot-PhantomJS/test.html ", "png");
         // builder.getOption();
         System.out.println(Snapshot.takeSnapshot(builder));
     }
