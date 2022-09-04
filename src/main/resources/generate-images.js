@@ -10,7 +10,6 @@ var snapshot =
   "    function(){" +
   "        var ele = document.querySelector('div[_echarts_instance_]');" +
   "        var mychart = echarts.getInstanceByDom(ele);" +
-  "return mychart.getDataURL({type:'png',pixelRatio:'2'});" +
   "        return mychart.getDataURL({type:'"+file_type+"', pixelRatio: " + pixel_ratio + ", excludeComponents: ['toolbox']});"+
   "    }";
 

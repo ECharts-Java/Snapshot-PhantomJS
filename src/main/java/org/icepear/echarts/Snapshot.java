@@ -16,6 +16,7 @@ import java.nio.file.Files;
 
 import org.apache.commons.io.IOUtils;
 import org.icepear.echarts.render.Engine;
+import org.icepear.echarts.snapshotSaver.SnapShotSaver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -83,7 +84,11 @@ public class Snapshot {
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
-        System.out.println(content);
+        // System.out.println(content);
         return content;
+    }
+
+    public static void saveSnapShot(String imageData, String path, SnapShotSaver snapshotSaver) {
+        snapshotSaver.save(imageData, path);
     }
 }

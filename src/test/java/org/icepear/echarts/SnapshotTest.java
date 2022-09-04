@@ -8,6 +8,8 @@ import org.icepear.echarts.components.grid.Grid;
 import org.icepear.echarts.components.tooltip.Tooltip;
 import org.icepear.echarts.components.tooltip.TooltipAxisPointer;
 import org.icepear.echarts.origin.util.SeriesOption;
+import org.icepear.echarts.snapshotSaver.PNGJPGSaver;
+import org.icepear.echarts.snapshotSaver.SVGBase64Saver;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -58,8 +60,20 @@ public class SnapshotTest {
 
     @Test
     public void testTakeSnapshot() {
-        SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "file:///Users/xiaochuanxu/CodeBase/Snapshot-PhantomJS/test.html ", "png");
+        SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, ".", "png");
         // builder.getOption();
         System.out.println(Snapshot.takeSnapshot(builder));
+    }
+
+    @Test
+    public void testSaveSnapshotBase64() {
+        SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, ".", "png");
+        Snapshot.saveSnapShot(Snapshot.takeSnapshot(builder), "./test.txt", new SVGBase64Saver());
+    }
+
+    @Test
+    public void testSaveSnapshotPNG() {
+        SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, ".", "png");
+        Snapshot.saveSnapShot(Snapshot.takeSnapshot(builder), "./test.png", new PNGJPGSaver());
     }
 }
