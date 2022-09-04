@@ -1,10 +1,7 @@
 package org.icepear.echarts;
 
-import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -12,7 +9,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
 
 import org.apache.commons.io.IOUtils;
 import org.icepear.echarts.render.Engine;
@@ -67,18 +63,19 @@ public class Snapshot {
         Engine engine = new Engine();
         String content = "";
 
-        // String html = (option == null) ? engine.renderHtml(chart) : engine.renderHtml(option);
+        // String html = (option == null) ? engine.renderHtml(chart) :
+        // engine.renderHtml(option);
 
         try {
             InputStream htmlStream = Snapshot.class.getResourceAsStream("/test.html");
             String html = readFromInputStream(htmlStream);
             System.out.println(html);
-            
+
             URL res = Snapshot.class.getClassLoader().getResource(SCRIPT_NAME);
             String scriptPath = res.getPath();
             System.out.println(scriptPath);
             Process p = new ProcessBuilder(PHANTOMJS_EXEC, scriptPath, settings.getPath(), settings.getFileType(),
-                    "2000", "2").start();
+                    settings.getDelay() * 1000 + "", settings.getDelay() + "").start();
             writeStdin(html, p.getOutputStream());
             content = IOUtils.toString(p.getInputStream(), Charset.defaultCharset());
         } catch (Exception e) {
