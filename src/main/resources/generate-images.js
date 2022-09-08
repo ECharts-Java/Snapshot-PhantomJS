@@ -10,11 +10,10 @@ var snapshot =
   "    function(){" +
   "        var ele = document.querySelector('div[_echarts_instance_]');" +
   "        var mychart = echarts.getInstanceByDom(ele);" +
-  "        return mychart.getDataURL({type:'"+file_type+"', pixelRatio: " + pixel_ratio + ", excludeComponents: ['toolbox']});"+
+  "        return mychart.getDataURL({type:'"+file_type+"', pixelRatio: " + pixel_ratio +  ", excludeComponents: ['toolbox']});"+
   "    }";
 
 var snapshot_svg =
-  "" +
   "    function () {" +
   "       var element = document.querySelector('div[_echarts_instance_] div');" +
   "       return element.innerHTML;" +
