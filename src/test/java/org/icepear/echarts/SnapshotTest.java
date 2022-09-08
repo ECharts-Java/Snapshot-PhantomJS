@@ -74,6 +74,6 @@ public class SnapshotTest {
     @Test
     public void testSaveSnapshotPNG() {
         SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, ".", "png");
-        Snapshot.saveSnapShot(Snapshot.takeSnapshot(builder), "./test.png", new PNGJPGSaver());
+        Snapshot.saveSnapShot(Snapshot.takeSnapshot(builder), "./test1.png", new PNGJPGSaver());
     }
 }

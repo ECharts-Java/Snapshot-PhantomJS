@@ -1,10 +1,7 @@
 package org.icepear.echarts;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URL;
@@ -43,18 +40,6 @@ public class Snapshot {
         }
     }
 
-    private static String readFromInputStream(InputStream inputStream)
-            throws IOException {
-        StringBuilder resultStringBuilder = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                resultStringBuilder.append(line).append("\n");
-            }
-        }
-        return resultStringBuilder.toString();
-    }
-
     public static String takeSnapshot(SnapshotSettingsBuilder settings) {
         // checkPhantomJS();
         logger.info("Generating files...");
@@ -63,14 +48,9 @@ public class Snapshot {
         Engine engine = new Engine();
         String content = "";
 
-        // String html = (option == null) ? engine.renderHtml(chart) :
-        // engine.renderHtml(option);
+        String html = (option == null) ? engine.renderHtml(chart) : engine.renderHtml(option);
 
         try {
-            InputStream htmlStream = Snapshot.class.getResourceAsStream("/test.html");
-            String html = readFromInputStream(htmlStream);
-            System.out.println(html);
-
             URL res = Snapshot.class.getClassLoader().getResource(SCRIPT_NAME);
             String scriptPath = res.getPath();
             System.out.println(scriptPath);
