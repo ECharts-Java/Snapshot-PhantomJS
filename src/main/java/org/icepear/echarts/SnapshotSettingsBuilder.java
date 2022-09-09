@@ -3,6 +3,9 @@ package org.icepear.echarts;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * 
+ */
 @Getter
 @Setter
 public class SnapshotSettingsBuilder {
