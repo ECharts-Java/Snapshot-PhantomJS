@@ -8,8 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class SVGBase64Saver implements SnapShotSaver{
-    private static Logger logger = LoggerFactory.getLogger(SVGBase64Saver.class);
+public class Base64Saver implements SnapShotSaver{
+    
+    private static Logger logger = LoggerFactory.getLogger(Base64Saver.class);
     /**
      * save the image as base64 string or SVG
      */

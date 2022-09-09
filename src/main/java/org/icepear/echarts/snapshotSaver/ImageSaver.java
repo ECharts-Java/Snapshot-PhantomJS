@@ -8,17 +8,16 @@ import org.icepear.echarts.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PNGJPGSaver implements SnapShotSaver{
+public class ImageSaver implements SnapShotSaver{
 
-    private static Logger logger = LoggerFactory.getLogger(PNGJPGSaver.class);
-
+    private static Logger logger = LoggerFactory.getLogger(ImageSaver.class);
+    
     public void save(String imageData, String outputPath) {
         String[] contentArray = imageData.split(",");
         if(contentArray.length != 2) {
             logger.error("Illegal imagedata.");            
             return;
         }
-        System.out.println(contentArray[1]);
         byte[] imageBytes = Utils.base64Decode(contentArray[1]);
         try {
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(outputPath));

@@ -8,8 +8,6 @@ import org.icepear.echarts.components.grid.Grid;
 import org.icepear.echarts.components.tooltip.Tooltip;
 import org.icepear.echarts.components.tooltip.TooltipAxisPointer;
 import org.icepear.echarts.origin.util.SeriesOption;
-import org.icepear.echarts.snapshotSaver.PNGJPGSaver;
-import org.icepear.echarts.snapshotSaver.SVGBase64Saver;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -60,20 +58,25 @@ public class SnapshotTest {
 
     @Test
     public void testTakeSnapshot() {
-        SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, ".", "png");
-        // builder.getOption();
+        SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "png");
         System.out.println(Snapshot.takeSnapshot(builder));
     }
 
     @Test
     public void testSaveSnapshotBase64() {
-        SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, ".", "png");
-        Snapshot.saveSnapShot(Snapshot.takeSnapshot(builder), "./test.txt", new SVGBase64Saver());
+        SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "png");
+        Snapshot.saveSnapShot(Snapshot.takeSnapshot(builder), "./test.txt");
     }
 
     @Test
     public void testSaveSnapshotPNG() {
-        SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, ".", "png", 1, 1);
-        Snapshot.saveSnapShot(Snapshot.takeSnapshot(builder), "./test2.png", new PNGJPGSaver());
+        SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "png", 1, 1);
+        Snapshot.saveSnapShot(Snapshot.takeSnapshot(builder), "./test.png");
+    }
+
+    @Test
+    public void testSaveSnapshotJPG() {
+        SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "jpg", 1, 2);
+        Snapshot.saveSnapShot(Snapshot.takeSnapshot(builder), "./test1.jpg");
     }
 }
