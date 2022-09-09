@@ -1,5 +1,8 @@
 package org.icepear.echarts;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.icepear.echarts.charts.bar.BarSeries;
 import org.icepear.echarts.components.coord.CategoryAxisTick;
 import org.icepear.echarts.components.coord.cartesian.CategoryAxis;
@@ -51,10 +54,15 @@ public class SnapshotTest {
         this.option = option;
     }
 
-    @Test
-    public void testCheckPhantomJSFailure() {
-
-    }
+    /**
+     * Only used when phantomjs is not installed since we didn't mock the result
+     */
+    // @Test
+    // public void testCheckPhantomJSFailure() {
+    //     SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "png");
+    //     assertTrue(!Snapshot.checkPhantomJS());
+    //     assertEquals("", Snapshot.takeSnapshot(builder));
+    // }
 
     @Test
     public void testTakeSnapshot() {
@@ -77,6 +85,6 @@ public class SnapshotTest {
     @Test
     public void testSaveSnapshotJPG() {
         SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "jpg", 1, 2);
-        Snapshot.saveSnapShot(Snapshot.takeSnapshot(builder), "./test1.jpg");
+        Snapshot.saveSnapShot(Snapshot.takeSnapshot(builder), "./test.jpg");
     }
 }

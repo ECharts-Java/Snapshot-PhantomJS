@@ -56,7 +56,7 @@ public class Snapshot {
             return "";
         }
         if(!checkPhantomJS()){
-            System.exit(-1);
+            return "";
         }
         logger.info("Generating files...");
         Option option = settings.getOption();
