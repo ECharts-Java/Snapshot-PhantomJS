@@ -20,7 +20,7 @@ public class Base64Saver implements SnapShotSaver{
             writer.write(imageData);
             writer.close();
         } catch(IOException e) {
-            logger.error("Save image to SVG/Base64 file failed. " + e.getMessage());
+            logger.error("Save image to Base64 file failed. " + e.getMessage());
         }
     }
 }
