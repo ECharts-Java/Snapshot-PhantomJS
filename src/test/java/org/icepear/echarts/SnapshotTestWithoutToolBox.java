@@ -70,18 +70,18 @@ public class SnapshotTestWithoutToolBox {
     @Test
     public void testSaveSnapshotBase64() {
         SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "png");
-        Snapshot.saveSnapShot(Snapshot.takeSnapshot(builder), "./test.txt");
+        Snapshot.saveSnapshot(Snapshot.takeSnapshot(builder), "./test.txt");
     }
 
     @Test
     public void testSaveSnapshotPNG() {
         SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "png", 1, 1);
-        Snapshot.saveSnapShot(Snapshot.takeSnapshot(builder), "./test.png");
+        Snapshot.saveSnapshot(Snapshot.takeSnapshot(builder), "./test.png");
     }
 
     @Test
     public void testSaveSnapshotJPG() {
         SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "jpg", 1, 2);
-        Snapshot.saveSnapShot(Snapshot.takeSnapshot(builder), "./test.jpg");
+        Snapshot.saveSnapshot(Snapshot.takeSnapshot(builder), "./test.jpg");
     }
 }

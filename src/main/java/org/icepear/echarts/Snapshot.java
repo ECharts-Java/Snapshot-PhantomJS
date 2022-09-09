@@ -50,6 +50,20 @@ public class Snapshot {
         return false;
     }
 
+    private static String postProcess(String rawImageData) {
+        String[] contentArray = rawImageData.split(",");
+        if(contentArray.length != 2) {
+            logger.error("Illegal raw image data.");            
+            return "";
+        }
+        return contentArray[1];
+    }
+
+    /**
+     * 
+     * @param settings
+     * @return image data in Base64 string format
+     */
     public static String takeSnapshot(SnapshotSettingsBuilder settings) {
         if(!isFileTypeSupported(settings.getFileType())) {
             logger.error("The file type you request is not supported.");
@@ -80,10 +94,10 @@ public class Snapshot {
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
-        return content;
+        return postProcess(content);
     }
 
-    public static void saveSnapShot(String imageData, String path) {
+    public static void saveSnapshot(String imageData, String path) {
         String[] pathParts = path.split("\\.");
         String suffix = pathParts[pathParts.length-1];
         SnapShotSaver saver;
