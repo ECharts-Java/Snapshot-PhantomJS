@@ -58,6 +58,10 @@ public class Snapshot {
         if(!checkPhantomJS()){
             return "";
         }
+        if(settings.getChart() == null && settings.getOption() == null) {
+            logger.error("Invalid snapshot settings. Empty chart and option.");
+            return "";
+        }
         logger.info("Generating files...");
         Option option = settings.getOption();
         Chart<?, ?> chart = settings.getChart();
