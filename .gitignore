@@ -37,3 +37,4 @@ target/
 .factorypath
 
 .DS_Store
+*.cer

@@ -1,6 +1,5 @@
 package org.icepear.echarts;
 import java.util.HashMap;
-import org.icepear.echarts.Option;
 import org.icepear.echarts.charts.line.LineSeries;
 import org.icepear.echarts.components.coord.ValueAxisLabel;
 import org.icepear.echarts.components.coord.cartesian.CategoryAxis;
