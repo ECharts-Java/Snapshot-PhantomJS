@@ -27,7 +27,7 @@ import org.icepear.echarts.render.Engine;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SnapshotTestWithToolBox {
+public class SnapshotWithToolBoxTest {
     private Option option;
 
 

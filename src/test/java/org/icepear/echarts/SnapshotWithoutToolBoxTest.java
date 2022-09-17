@@ -11,7 +11,7 @@ import org.icepear.echarts.origin.util.SeriesOption;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SnapshotTestWithoutToolBox {
+public class SnapshotWithoutToolBoxTest {
     private Option option;
 
     @Before

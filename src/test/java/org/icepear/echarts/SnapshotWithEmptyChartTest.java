@@ -3,7 +3,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class SnapshotTestWithEmptyChart {
+public class SnapshotWithEmptyChartTest {
     private Option option = null;
 
     @Test
