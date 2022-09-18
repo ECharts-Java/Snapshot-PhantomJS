@@ -3,7 +3,7 @@
 - [x] Local unit testing
 - [ ] Docker
 - [ ] AWS remote
-    - [ ] Linux
+    - [x] Linux
     - [ ] Windows
     - [ ] MacOS
 - [ ] Integration Test with Snapshot version
@@ -17,6 +17,19 @@ To use this library, make sure you've installed `phantomjs`.
 For Mac users using brew,
 ```
 brew install phantomjs
+```
+
+For AWS Linux users,
+```
+sudo wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
+
+sudo mkdir /opt/phantomjs
+
+bzip2 -d phantomjs-2.1.1-linux-x86_64.tar.bz2
+
+sudo tar -xvf phantomjs-2.1.1-linux-x86_64.tar --directory /opt/phantomjs/ --strip-components 1
+
+sudo ln -s /opt/phantomjs/bin/phantomjs /usr/bin/phantomjs
 ```
 
 For other users, please refer to the official website of [phantomjs](https://phantomjs.org/download.html) for downloading details.
