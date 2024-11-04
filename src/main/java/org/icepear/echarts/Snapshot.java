@@ -60,31 +60,43 @@ public class Snapshot {
         return contentArray[1];
     }
 
+    // TODO - add custome exception class
+    private static boolean validateBuilderSettings(SnapshotSettingsBuilder settings) {
+        if (!isFileTypeSupported(settings.getFileType())) {
+            logger.error("The file type you request is not supported.");
+            return false;
+        }
+        if (!checkPhantomJS()) {
+            return false;
+        }
+        if (settings.getChart() == null && settings.getOption() == null) {
+            logger.error("Invalid snapshot settings. Empty chart and option.");
+            return false;
+        }
+        return true;
+    }
+
     /**
      * 
      * @param settings
      * @return image data in Base64 string format
      */
     public static String takeSnapshot(SnapshotSettingsBuilder settings) {
-        if (!isFileTypeSupported(settings.getFileType())) {
-            logger.error("The file type you request is not supported.");
+        if (!validateBuilderSettings(settings)) {
             return "";
         }
-        if (!checkPhantomJS()) {
-            return "";
-        }
-        if (settings.getChart() == null && settings.getOption() == null) {
-            logger.error("Invalid snapshot settings. Empty chart and option.");
-            return "";
-        }
-        logger.info("Generating files...");
+        logger.info("Generating files for...");
         Option option = settings.getOption();
         Chart<?, ?> chart = settings.getChart();
         Engine engine = new Engine();
+
+        String height = settings.getHeight();
+        String width = settings.getWidth();
+
+        String html = (option == null) ? engine.renderHtml(chart, height, width)
+                : engine.renderHtml(option, height, width);
+
         String content = "";
-
-        String html = (option == null) ? engine.renderHtml(chart) : engine.renderHtml(option);
-
         try {
             URL res = Snapshot.class.getClassLoader().getResource(SCRIPT_NAME);
             String scriptPath = res.getPath();
@@ -92,6 +104,7 @@ public class Snapshot {
                     settings.getDelay() * 1000 + "", settings.getPixelRatio() + "").start();
             writeStdin(html, p.getOutputStream());
             content = IOUtils.toString(p.getInputStream(), Charset.defaultCharset());
+            System.out.print(content);
         } catch (Exception e) {
             logger.error(e.getMessage());
         }

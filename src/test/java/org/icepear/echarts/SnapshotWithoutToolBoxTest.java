@@ -11,11 +11,15 @@ import org.icepear.echarts.components.grid.Grid;
 import org.icepear.echarts.components.tooltip.Tooltip;
 import org.icepear.echarts.components.tooltip.TooltipAxisPointer;
 import org.icepear.echarts.origin.util.SeriesOption;
+import org.icepear.echarts.render.Engine;
 import org.junit.Before;
 import org.junit.Test;
 
 public class SnapshotWithoutToolBoxTest {
     private Option option;
+    private String height = "600px";
+    private String width = "600px";
+
 
     @Before
     public void buildOption() {
@@ -51,7 +55,7 @@ public class SnapshotWithoutToolBoxTest {
                 .setYAxis(yAxis)
                 .setSeries(new SeriesOption[] { series });
 
-        this.option = option;
+        this.option = option.setAnimation(false);
     }
 
     /**
@@ -78,13 +82,13 @@ public class SnapshotWithoutToolBoxTest {
 
     @Test
     public void testSaveSnapshotPNG() {
-        SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "png", 1, 1);
+        SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "png", height, width, 1);
         Snapshot.saveSnapshot(Snapshot.takeSnapshot(builder), "./test.png");
     }
 
     @Test
     public void testSaveSnapshotJPG() {
-        SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "jpg", 1, 2);
+        SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "jpg", height, width, 1);
         Snapshot.saveSnapshot(Snapshot.takeSnapshot(builder), "./test.jpg");
     }
 }

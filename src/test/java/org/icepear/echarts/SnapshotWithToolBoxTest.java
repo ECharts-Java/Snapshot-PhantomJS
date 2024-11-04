@@ -29,7 +29,8 @@ import org.junit.Test;
 
 public class SnapshotWithToolBoxTest {
     private Option option;
-
+    private String height = "600px";
+    private String width = "600px";
 
     @Before
     public void buildOption() {
@@ -135,13 +136,13 @@ public class SnapshotWithToolBoxTest {
 
     @Test
     public void testSaveSnapshotPNG() {
-        SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "png", 4, 1);
+        SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "png", height, width, 1);
         Snapshot.saveSnapshot(Snapshot.takeSnapshot(builder), "./test.png");
     }
 
     @Test
     public void testSaveSnapshotJPG() {
-        SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "jpg", 4, 2);
+        SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "jpg", height, width, 1);
         Snapshot.saveSnapshot(Snapshot.takeSnapshot(builder), "./test.jpg");
     }
 }
