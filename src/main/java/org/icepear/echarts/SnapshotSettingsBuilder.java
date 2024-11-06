@@ -43,5 +43,4 @@ public class SnapshotSettingsBuilder {
         this.width = width;
         this.pixelRatio = pixelRatio;
     }
-
 }

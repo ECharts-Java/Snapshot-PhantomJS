@@ -8,6 +8,9 @@ import java.net.URL;
 import java.nio.charset.Charset;
 
 import org.apache.commons.io.IOUtils;
+import org.icepear.echarts.exceptions.Constants;
+import org.icepear.echarts.exceptions.MissingDependencyException;
+import org.icepear.echarts.exceptions.UnsupportedConfigurationException;
 import org.icepear.echarts.render.Engine;
 import org.icepear.echarts.snapshotSaver.Base64Saver;
 import org.icepear.echarts.snapshotSaver.ImageSaver;
@@ -21,26 +24,20 @@ public class Snapshot {
     private static final String[] SUPPORTED_FILE_TYPES = new String[] { "png", "jpg" };
     private static Logger logger = LoggerFactory.getLogger(Snapshot.class);
 
-    private static void writeStdin(String html, OutputStream stdin) {
-        try {
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(stdin));
-            writer.write(html);
-            writer.close();
-        } catch (IOException e) {
-            logger.error("Write Html into STDIN failed. " + e.getMessage());
-        }
+    private static void writeStdin(String html, OutputStream stdin) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(stdin));
+        writer.write(html);
+        writer.close();
     }
 
-    public static boolean checkPhantomJS() {
+    public static void checkPhantomJS() throws Exception {
         try {
             Process p = new ProcessBuilder(PHANTOMJS_EXEC, "--version").start();
             String stdout = IOUtils.toString(p.getInputStream(), Charset.defaultCharset());
             logger.info("PhantomJS is installed and its version is " + stdout);
         } catch (Exception e) {
-            logger.error("PhantomJS is not installed. You need to install it before proceeding." + e.getMessage());
-            return false;
+            throw new MissingDependencyException(Constants.MISSING_DEPENDENCY, e);
         }
-        return true;
     }
 
     private static boolean isFileTypeSupported(String fileType) {
@@ -60,20 +57,14 @@ public class Snapshot {
         return contentArray[1];
     }
 
-    // TODO - add custome exception class
-    private static boolean validateBuilderSettings(SnapshotSettingsBuilder settings) {
+    private static void validateBuilderSettings(SnapshotSettingsBuilder settings) throws Exception {
         if (!isFileTypeSupported(settings.getFileType())) {
-            logger.error("The file type you request is not supported.");
-            return false;
+            throw new IllegalArgumentException(String.format(Constants.UNSUPPORTED_FILE_TYPES, settings.getFileType()));
         }
-        if (!checkPhantomJS()) {
-            return false;
-        }
+        checkPhantomJS();
         if (settings.getChart() == null && settings.getOption() == null) {
-            logger.error("Invalid snapshot settings. Empty chart and option.");
-            return false;
+            throw new UnsupportedConfigurationException(Constants.UNSUPPORTED_ECHART_CONFIG);
         }
-        return true;
     }
 
     /**
@@ -81,10 +72,9 @@ public class Snapshot {
      * @param settings
      * @return image data in Base64 string format
      */
-    public static String takeSnapshot(SnapshotSettingsBuilder settings) {
-        if (!validateBuilderSettings(settings)) {
-            return "";
-        }
+    public static String takeSnapshot(SnapshotSettingsBuilder settings) throws Exception {
+        validateBuilderSettings(settings);
+
         logger.info("Generating files for...");
         Option option = settings.getOption();
         Chart<?, ?> chart = settings.getChart();
@@ -104,9 +94,8 @@ public class Snapshot {
                     settings.getDelay() * 1000 + "", settings.getPixelRatio() + "").start();
             writeStdin(html, p.getOutputStream());
             content = IOUtils.toString(p.getInputStream(), Charset.defaultCharset());
-            System.out.print(content);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error(String.format("[takeSnapshot] Error in writing the html. Error msg is %s", e.getMessage()));
         }
         return postProcess(content);
     }
