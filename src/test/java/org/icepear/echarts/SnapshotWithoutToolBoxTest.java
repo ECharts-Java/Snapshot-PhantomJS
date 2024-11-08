@@ -1,8 +1,5 @@
 package org.icepear.echarts;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.icepear.echarts.charts.bar.BarSeries;
 import org.icepear.echarts.components.coord.CategoryAxisTick;
 import org.icepear.echarts.components.coord.cartesian.CategoryAxis;
@@ -11,7 +8,6 @@ import org.icepear.echarts.components.grid.Grid;
 import org.icepear.echarts.components.tooltip.Tooltip;
 import org.icepear.echarts.components.tooltip.TooltipAxisPointer;
 import org.icepear.echarts.origin.util.SeriesOption;
-import org.icepear.echarts.render.Engine;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +15,6 @@ public class SnapshotWithoutToolBoxTest {
     private Option option;
     private String height = "600px";
     private String width = "600px";
-
 
     @Before
     public void buildOption() {
@@ -63,31 +58,31 @@ public class SnapshotWithoutToolBoxTest {
      */
     // @Test
     // public void testCheckPhantomJSFailure() {
-    //     SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "png");
-    //     assertTrue(!Snapshot.checkPhantomJS());
-    //     assertEquals("", Snapshot.takeSnapshot(builder));
+    // SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "png");
+    // assertTrue(!Snapshot.checkPhantomJS());
+    // assertEquals("", Snapshot.takeSnapshot(builder));
     // }
 
     @Test
-    public void testTakeSnapshot() {
+    public void testTakeSnapshot() throws Exception {
         SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "png");
         System.out.println(Snapshot.takeSnapshot(builder));
     }
 
     @Test
-    public void testSaveSnapshotBase64() {
+    public void testSaveSnapshotBase64() throws Exception {
         SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "png");
         Snapshot.saveSnapshot(Snapshot.takeSnapshot(builder), "./test.txt");
     }
 
     @Test
-    public void testSaveSnapshotPNG() {
+    public void testSaveSnapshotPNG() throws Exception {
         SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "png", height, width, 1);
         Snapshot.saveSnapshot(Snapshot.takeSnapshot(builder), "./test.png");
     }
 
     @Test
-    public void testSaveSnapshotJPG() {
+    public void testSaveSnapshotJPG() throws Exception {
         SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "jpg", height, width, 1);
         Snapshot.saveSnapshot(Snapshot.takeSnapshot(builder), "./test.jpg");
     }

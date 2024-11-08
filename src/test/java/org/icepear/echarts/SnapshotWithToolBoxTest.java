@@ -121,7 +121,7 @@ public class SnapshotWithToolBoxTest {
     }
 
     @Test
-    public void testTakeSnapshot() {
+    public void testTakeSnapshot() throws Exception{
         Engine engine = new Engine();
         SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "png");
         engine.render("./test.html", option);
@@ -129,19 +129,19 @@ public class SnapshotWithToolBoxTest {
     }
 
     @Test
-    public void testSaveSnapshotBase64() {
+    public void testSaveSnapshotBase64() throws Exception{
         SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "png");
         Snapshot.saveSnapshot(Snapshot.takeSnapshot(builder), "./test.txt");
     }
 
     @Test
-    public void testSaveSnapshotPNG() {
+    public void testSaveSnapshotPNG() throws Exception{
         SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "png", height, width, 1);
         Snapshot.saveSnapshot(Snapshot.takeSnapshot(builder), "./test.png");
     }
 
     @Test
-    public void testSaveSnapshotJPG() {
+    public void testSaveSnapshotJPG() throws Exception{
         SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "jpg", height, width, 1);
         Snapshot.saveSnapshot(Snapshot.takeSnapshot(builder), "./test.jpg");
     }

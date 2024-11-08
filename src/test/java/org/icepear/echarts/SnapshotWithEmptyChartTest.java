@@ -1,15 +1,14 @@
 package org.icepear.echarts;
-import static org.junit.Assert.assertEquals;
 
+import org.icepear.echarts.exceptions.UnsupportedConfigurationException;
 import org.junit.Test;
 
 public class SnapshotWithEmptyChartTest {
     private Option option = null;
 
-    @Test
-    public void testTakeSnapshot() {
+    @Test(expected = UnsupportedConfigurationException.class)
+    public void testTakeSnapshot() throws Exception{
         SnapshotSettingsBuilder builder = new SnapshotSettingsBuilder(option, "png");
-        assertEquals("", Snapshot.takeSnapshot(builder));
+        Snapshot.takeSnapshot(builder);
     }
-
 }
