@@ -2,10 +2,10 @@
 
 - [x] Local unit testing
 - [ ] Docker
-- [ ] AWS remote
+- [ ] OS
     - [x] Linux
     - [ ] Windows
-    - [ ] MacOS
+    - [x] MacOS
 - [ ] Integration Test with Snapshot version
 
 ## Introduction
@@ -55,16 +55,18 @@ TBC
 
 ### SnapshotSettingsBuilder.java
 
-It constructs an object with the following properties related to metadata of the snapshot.
+It constructs an object with the following properties as the metadata of the snapshot.
 
 Required: 
-- `String fileType`: the fileType of the image. Now we support "png" and "jpg".
+- `String fileType`: the fileType of the image. Now we support "png", "jpg", and "txt". Note that for "txt" file, the image will be stored into the text file as base 64 encoding.
 - `Option option`: must have this field if Chart<?, ?> chart is not specified. This is the option object of ECharts.
 - `Chart<?,?> chart`: must have this field if Option option is not specified. This is the chart object defined in ECharts-Java.
 
 Optional:
-- `int delay`: the waiting time (in second) of an image to be fully rendered. Since some ECharts have the animation effects, it is suggested to wait for a few seconds before making a snapshot. <b>The default value is 2</b>.
+- `height`: the height of the image - supports "px" or "%". Default is "100%".
+- `width`: the width of the image - supports "px" or "%". Default is "100%".
 - `double pixelRation`: the pixel ration of an image. It is defined [here](https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio#value). 
+
 ### takeSnapshot(SnapshotSettingsBuilder settings)
 
 This function takes an object related to the settings of snapshot, and returns a base64 string of the image.

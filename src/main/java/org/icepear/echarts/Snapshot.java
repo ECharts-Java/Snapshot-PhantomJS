@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 public class Snapshot {
     private static final String PHANTOMJS_EXEC = "phantomjs";
     private static final String SCRIPT_NAME = "generate-images.js";
-    private static final String[] SUPPORTED_FILE_TYPES = new String[] { "png", "jpg" };
+    private static final String[] SUPPORTED_FILE_TYPES = new String[] { "png", "jpg", "txt"};
     private static Logger logger = LoggerFactory.getLogger(Snapshot.class);
 
     private static void writeStdin(String html, OutputStream stdin) throws IOException {
