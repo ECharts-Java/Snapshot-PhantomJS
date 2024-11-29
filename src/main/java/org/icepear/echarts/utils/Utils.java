@@ -9,5 +9,5 @@ public class Utils {
      */
     public static byte[] base64Decode(String data) {
         return Base64.getMimeDecoder().decode(data);
-    }    
+    }
 }

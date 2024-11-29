@@ -6,6 +6,8 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.apache.commons.io.IOUtils;
 import org.icepear.echarts.exceptions.Constants;
@@ -15,6 +17,7 @@ import org.icepear.echarts.render.Engine;
 import org.icepear.echarts.snapshotSaver.Base64Saver;
 import org.icepear.echarts.snapshotSaver.ImageSaver;
 import org.icepear.echarts.snapshotSaver.SnapShotSaver;
+import org.icepear.echarts.utils.OsUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -88,8 +91,12 @@ public class Snapshot {
 
         String content = "";
         try {
-            URL res = Snapshot.class.getClassLoader().getResource(SCRIPT_NAME);
-            String scriptPath = res.getPath();
+            String scriptPath;
+            if(OsUtils.isWindows()) {
+                scriptPath = Paths.get(Snapshot.class.getClassLoader().getResource(SCRIPT_NAME).toURI()).toString();
+            } else {
+                scriptPath = Snapshot.class.getClassLoader().getResource(SCRIPT_NAME).toString();
+            }
             Process p = new ProcessBuilder(PHANTOMJS_EXEC, scriptPath, settings.getFileType(),
                     settings.getDelay() * 1000 + "", settings.getPixelRatio() + "").start();
             writeStdin(html, p.getOutputStream());
