@@ -5,7 +5,7 @@
 
   <groupId>org.icepear.echarts.snapshot</groupId>
   <artifactId>echarts-java-snapshot-phantomjs</artifactId>
-  <version>1.0.0-alpha</version>
+  <version>1.0.0-beta</version>
 
   <name>ECharts Java Snapshot Phantomjs</name>
   <description>
@@ -50,7 +50,7 @@
     <dependency>
       <groupId>org.icepear.echarts</groupId>
       <artifactId>echarts-java</artifactId>
-      <version>1.0.7</version>
+      <version>1.1.0</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
