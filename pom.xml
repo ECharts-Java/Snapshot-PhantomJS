@@ -5,7 +5,7 @@
 
   <groupId>org.icepear.echarts.snapshot</groupId>
   <artifactId>echarts-java-snapshot-phantomjs</artifactId>
-  <version>1.0.0-alpha</version>
+  <version>1.0.0-beta</version>
 
   <name>ECharts Java Snapshot Phantomjs</name>
   <description>
